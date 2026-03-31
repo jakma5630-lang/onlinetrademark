@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Trademark | Trademark Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-container i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .desktop-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .desktop-nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        .desktop-nav ul li a.active {
+            color: var(--accent);
+        }
+
+        .desktop-nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 3px;
+        }
+
+        /* Mobile Navigation */
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 101;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav ul li {
+            margin: 0.8rem 0;
+        }
+
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.8rem 2rem;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav ul li a:hover,
+        .mobile-nav ul li a.active {
+            color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - 160px);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(124, 58, 237, 0.9)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        /* Verification Section */
+        .verification-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .verification-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            background-color: #f8fafc;
+        }
+
+        .input-group {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .serial-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .serial-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .verify-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .verify-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .verification-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 600px;
+            display: none;
+            text-align: center;
+        }
+
+        .verification-result.success {
+            display: block;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .verification-result.error {
+            display: block;
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .result-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-text {
+            text-align: left;
+        }
+
+        .result-text h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .view-pdf-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-pdf-btn:hover {
+            background-color: #0da271;
+        }
+
+        /* Services Section */
+        .services-section {
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+/* Contact Form */
+        .contact-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .about-image i {
+            font-size: 8rem;
+            color: var(--primary);
+            opacity: 0.8;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-column .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-column .social-icons a {
+            background-color: #334155;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .footer-column .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Page-specific styles */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .serial-input {
+                border-radius: 8px;
+                margin-bottom: 1rem;
+            }
+            
+            .verify-btn {
+                border-radius: 8px;
+                width: 100%;
+            }
+            
+            .result-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .verification-section, .contact-section, .about-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none !important;
+            }
+            
+            .hamburger {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.7rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <i class="fas fa-certificate"></i>
+                <div class="logo-text">
+                    <h1>Online Trademark</h1>
+                    <p>Protecting Your Brand Identity</p>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="services">Services</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Hamburger Button -->
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars" id="hamburger-icon"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <ul>
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="services">Services</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page-content active">
+            <div class="hero">
+                <h2>Verify Your Trademark Status Instantly</h2>
+                <p>Use our trademark verification system to check the status of your registered trademark and access your official documents. Protect your brand identity with our comprehensive trademark services.</p>
+            </div>
+            
+            <div class="verification-section">
+                <h2 class="section-title"><i class="fas fa-search"></i> Trademark Verification</h2>
+                <div class="verification-box">
+                    <p>Enter your trademark serial number below to verify its status and access the official documentation.</p>
+                    
+                    <div class="input-group">
+                        <input type="text" id="serial-input" class="serial-input" placeholder="Enter Trademark Serial Number (e.g., TM-)">
+                        <button id="verify-btn" class="verify-btn">Verify Trademark</button>
+                    </div>
+                    
+                    <div id="verification-result" class="verification-result">
+                        <!-- Verification result will be displayed here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-section">
+                <h2 class="section-title"><i class="fas fa-shield-alt"></i> Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-copyright"></i>
+                        <h3>Trademark Registration</h3>
+                        <p>Complete trademark registration services to protect your brand identity locally and internationally.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-gavel"></i>
+                        <h3>Legal Protection</h3>
+                        <p>Take legal steps against trademark infringement and unauthorized use of your registered trademarks.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-search"></i>
+                        <h3>Trademark Search</h3>
+                        <p>Comprehensive trademark search services to ensure your brand is unique and available for registration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- Services Page -->
+        <section id="services" class="page-content">
+            <div class="hero">
+                <h2>Our Comprehensive Trademark Services</h2>
+                <p>We offer a full range of trademark services to protect your brand identity and intellectual property.</p>
+            </div>
+            
+            <div class="services-section">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-file-signature"></i>
+                        <h3>Trademark Registration</h3>
+                        <p>We guide you through the complete trademark registration process, from initial search to final approval.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Infringement Monitoring</h3>
+                        <p>Continuous monitoring of trademark databases and marketplaces to detect potential infringements.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-globe"></i>
+                        <h3>International Protection</h3>
+                        <p>Secure trademark protection in multiple countries through international trademark agreements.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <h3>Renewal Services</h3>
+                        <p>Timely renewal of your trademark registrations to ensure continuous protection of your brand.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Portfolio Management</h3>
+                        <p>Comprehensive management of your trademark portfolio with regular status updates and reporting.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Legal Consultation</h3>
+                        <p>Expert legal consultation on trademark matters, infringement cases, and brand protection strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Page -->
+        <section id="about" class="page-content">
+            <div class="hero">
+                <h2>About Online Trademark</h2>
+                <p>We are dedicated to protecting your brand identity through comprehensive trademark services and legal support.</p>
+            </div>
+            
+            <div class="about-section">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Mission</h3>
+                        <p>Online Trademark was founded with the mission to make trademark protection accessible and straightforward for businesses of all sizes. We understand that your brand is one of your most valuable assets, and we're committed to helping you protect it.</p>
+                        
+                        <p>Our team of trademark experts and legal professionals work together to provide comprehensive trademark services, from initial registration to enforcement against infringement.</p>
+                        
+                        <h3>Why Choose Us?</h3>
+                        <p>With years of experience in trademark law and brand protection, we offer:</p>
+                        <ul>
+                            <li>Expert trademark registration services</li>
+                            <li>Comprehensive infringement monitoring</li>
+                            <li>International trademark protection</li>
+                            <li>Legal support for trademark disputes</li>
+                            <li>User-friendly verification system</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="about-image">
+                        <i class="fas fa-trademark"></i>
+                        <h3>Online Trademark</h3>
+                        <p>Protecting Brands Since 2015</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Us Page -->
+        <section id="contact" class="page-content">
+            <div class="hero">
+                <h2>Contact Online Trademark</h2>
+                <p>Get in touch with our team for trademark inquiries, legal consultations, or support with our services.</p>
+            </div>
+            
+            <div class="contact-section">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> Send Us a Message</h2>
+                
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                
+                <div style="margin-top: 3rem; padding: 1.5rem; background-color: #f8fafc; border-radius: 8px;">
+                    <h3 style="color: var(--dark); margin-bottom: 1rem;">Other Contact Information</h3>
+                    <p><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> <strong>Email:</strong> legal@onlinetrademark.org</p>
+                    <p><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> <strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> <strong>Address:</strong> 123 Intellectual Property Ave, Suite 500, New York, NY 10001</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Online Trademark</h3>
+                <p>Protecting your brand identity through comprehensive trademark services and legal support for businesses worldwide.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#" class="nav-link" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="services">Services</a>
+                <a href="#" class="nav-link" data-page="about">About Us</a>
+                <a href="#" class="nav-link" data-page="contact">Contact Us</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <a href="#">Trademark Registration</a>
+                <a href="#">Trademark Search</a>
+                <a href="#">Legal Protection</a>
+                <a href="#">International Trademarks</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> legal@onlinetrademark.org</p>
+                <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Intellectual Property Ave, Suite 500, New York, NY 10001</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Online Trademark. All rights reserved. | Designed for trademark verification and protection services.</p>
+        </div>
+    </footer>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
+            const hamburger = document.getElementById('hamburger');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const mobileNav = document.getElementById('mobile-nav');
+            
+            // Function to toggle mobile menu
+            function toggleMobileMenu() {
+                mobileNav.classList.toggle('active');
+                if (mobileNav.classList.contains('active')) {
+                    hamburgerIcon.className = 'fas fa-times';
+                } else {
+                    hamburgerIcon.className = 'fas fa-bars';
+                }
+            }
+            
+            // Function to close mobile menu
+            function closeMobileMenu() {
+                mobileNav.classList.remove('active');
+                hamburgerIcon.className = 'fas fa-bars';
+            }
+            
+            // Function to switch pages
+            function switchPage(pageId) {
+                // Update page contents
+                pageContents.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === pageId) {
+                        page.classList.add('active');
+                    }
+                });
+                
+                // Update active nav links (both desktop and mobile)
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu
+                closeMobileMenu();
+            }
+            
+            // Page navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    switchPage(targetPage);
+                });
+            });
+            
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !mobileNav.contains(e.target) && mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Close mobile menu when clicking a link inside it
+            mobileNav.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    setTimeout(closeMobileMenu, 300);
+                }
+            });
+            
+            // Close mobile menu on window resize (if resized to desktop)
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Trademark verification functionality
+            const verifyBtn = document.getElementById('verify-btn');
+            const serialInput = document.getElementById('serial-input');
+            const verificationResult = document.getElementById('verification-result');
+            
+            // Sample trademark database
+            const trademarkDatabase = [
+                { serial: 'TM-78789', status: 'verified', name: 'NOMUNA TV', owner: 'OMI ISLAM' },
+                { serial: 'TM-78790', status: 'verified', name: 'BRAC SCHOOL BANGLADESH', owner: 'MD ASADUJJAMAN' },
+                { serial: 'TM-54321', status: 'verified', name: 'Foodie Delight', owner: 'Gourmet Foods Co.' },
+                { serial: 'TM-58899', status: 'verified', name: 'CHINA MART', owner: 'ALVEE MASAL' },
+                { serial: 'TM-3748840', status: 'verified', name: 'VIP TRADER MARATHI', owner: 'MD MAKSUD' }
+                ];
+            
+            verifyBtn.addEventListener('click', function() {
+                const serialNumber = serialInput.value.trim().toUpperCase();
+                
+                // Clear previous results
+                verificationResult.className = 'verification-result';
+                verificationResult.innerHTML = '';
+                
+                if (!serialNumber) {
+                    verificationResult.className = 'verification-result error';
+                    verificationResult.innerHTML = '<p><i class="fas fa-exclamation-circle"></i> Please enter a trademark serial number.</p>';
+                    return;
+                }
+                
+                // Check if serial number exists in database
+                const trademark = trademarkDatabase.find(tm => tm.serial === serialNumber);
+                
+                if (trademark) {
+                    // Show success result
+                    verificationResult.className = 'verification-result success';
+                    
+                    const pdfUrl = `/trademark/${serialNumber}.pdf`;
+verificationResult.innerHTML = `
+                        <div class="result-content">
+                            <div class="result-text">
+                                <h3><i class="fas fa-check-circle"></i> Trademark Verified</h3>
+                                <p><strong>Serial Number:</strong> ${trademark.serial}</p>
+                                <p><strong>Trademark Name:</strong> ${trademark.name}</p>
+                                <p><strong>Owner:</strong> ${trademark.owner}</p>
+                                <p><strong>Status:</strong> <span style="color: var(--success); font-weight: 600;">Registered & Active</span></p>
+                            </div>
+                            <a href="${pdfUrl}" target="_blank" class="view-pdf-btn">
+                                <i class="fas fa-file-pdf"></i> View PDF Document
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    // Show error result
+                    verificationResult.className = 'verification-result error';
+                    verificationResult.innerHTML = `
+                        <p><i class="fas fa-times-circle"></i> Trademark serial number <strong>${serialNumber}</strong> not found in our database. Please check the number and try again.</p>
+                    `;
+                }
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // In a real implementation, you would send this data to a server
+                // For demo purposes, we'll just show an alert
+                alert(`Thank you for your message, ${name}! Your inquiry has been sent to legal@onlinetrademark.org. We'll respond to you at ${email} as soon as possible.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+            
+            // Simulate a successful verification on page load for demo purposes
+            window.addEventListener('load', function() {
+                // Auto-populate with a sample serial number for demo
+                serialInput.value = 'TM-';
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+        
